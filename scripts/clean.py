@@ -16,7 +16,8 @@ for column in ("user_id", "timestamp", "event_type"):
 events = events[(events[["user_id", "timestamp", "event_type"]] != "").all(axis=1)]
 events["duration_seconds"] = pd.to_numeric(events["duration_seconds"], errors="coerce")
 events["timestamp"] = pd.to_datetime(events["timestamp"], format="mixed", errors="coerce", utc=True)
-events = events[events["event_type"].isin(valid_types) & (events["duration_seconds"] > 0) & events["timestamp"].notna()].copy()
+events = events[events["event_type"].isin(valid_types) & (events["duration_seconds"] > 0) & (events["duration_seconds"] % 1 == 0) & events["timestamp"].notna()].copy()
+events["duration_seconds"] = events["duration_seconds"].astype("int64")
 events["timestamp"] = events["timestamp"].dt.strftime("%Y-%m-%dT%H:%M:%S")
 destination.parent.mkdir(parents=True, exist_ok=True)
 events.to_csv(destination, index=False)

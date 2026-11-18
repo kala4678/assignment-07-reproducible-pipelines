@@ -1,0 +1,6 @@
+# Valid event types in the course dataset.
+click
+view
+purchase
+login
+scroll

@@ -1,0 +1,6 @@
+[project]
+name = "event-pipeline"
+version = "0.1.0"
+description = "A reproducible event analysis pipeline"
+requires-python = ">=3.10"
+dependencies = ["dvc>=3.0,<4", "marimo>=0.11,<1", "matplotlib>=3.8,<4", "pandas>=2.0,<4"]
